@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Барбершоп | Добавить запись</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<style>
+    body {
+        background-color: powderblue;
+    }
+</style>
+
+<body>
+    <blockquote class="blockquote text-center"><h1>Добавить запись</h1></blockquote>
+<div class="row">
+    <div class="col-md-8 offset-md-4">
+        <form action="#" th:action="@{/save}" th:object="${client}" method="post">
+            <table>
+                <tr>
+                    <td>ID клиента:</td>
+                    <td><input type="number" th:field="*{id}"></td>
+                </tr>
+                <tr>
+                    <td>ФИО клиента:</td>
+                    <td><input type="text" th:field="*{clientName}"></td>
+                </tr>
+                <tr>
+                    <td>Дата записи:</td>
+                    <td><input type="date" min="1900" max="2024" th:field="*{date}"></td>
+                </tr>
+                <tr>
+                    <td>Наименование услуги:</td>
+                    <td><input type="text" th:field="*{service}"></td>
+                </tr>
+                <tr>
+                    <td>ФИО обслуживающего мастера:</td>
+                    <td><input type="text" th:field="*{master}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" class="btn btn-primary" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
