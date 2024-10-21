@@ -1,26 +1,33 @@
-package org.example.barbershop_23;
+package org.example.cargotransportation_24;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 
 @Setter
 @Entity
-public class Clients {
+public class Cargoes {
     private Long id;
     @Getter
-    private String clientName;
+    private String name;
     @Getter
-    private LocalDate date;
+    private String content;
     @Getter
-    private String service;
+    private String sendingCity;
     @Getter
-    private String master;
+    private Date sendingDate;
+    @Getter
+    private String receiptCity;
+    @Getter
+    private Date receiptDate;
 
-    protected Clients() {
+    protected Cargoes() {
     }
 
     @Id
@@ -31,6 +38,7 @@ public class Clients {
 
     @Override
     public String toString() {
-        return "barbershop [id=" + id + ", client name=" + clientName + ", date=" + date + ", service=" + service + ", master=" + master +"]";
+        return "Cargo [id=" + id + ", name=" + name + ", content=" + content + ", sending city=" + sendingCity +
+                ", sending date=" + sendingDate + ", city of receipt=" + receiptCity + ", date of receipt=" + receiptDate + "]";
     }
 }
