@@ -7,8 +7,7 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 
 @Setter
 @Entity
@@ -21,11 +20,11 @@ public class Cargoes {
     @Getter
     private String sendingCity;
     @Getter
-    private Date sendingDate;
+    private LocalDate sendingDate;
     @Getter
     private String receiptCity;
     @Getter
-    private Date receiptDate;
+    private LocalDate receiptDate;
 
     protected Cargoes() {
     }
