@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Барбершоп | Редактирование записи</title>
+    <title>Грузоперевозки | Редактирование информации о грузе</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
@@ -14,30 +14,38 @@
 </style>
 
 <body>
-    <blockquote class="blockquote text-center"><h1>Редактирование записи</h1></blockquote>
+    <blockquote class="blockquote text-center"><h1>Редактирование информации о грузе</h1></blockquote>
 <div class="row">
     <div class="col-md-8 offset-md-4">
-        <form action="#" th:action="@{/save}" th:object="${client}" method="post">
+        <form action="#" th:action="@{/save}" th:object="${cargo}" method="post">
             <table>
                 <tr>
-                    <td>ID записи:</td>
+                    <td>ID груза:</td>
                     <td><input type="number" th:field="*{id}" readonly="readonly"></td>
                 </tr>
                 <tr>
-                    <td>ФИО клиента:</td>
-                    <td><input type="text" th:field="*{clientName}"></td>
+                    <td>Наименование груза:</td>
+                    <td><input type="text" th:field="*{name}"></td>
                 </tr>
                 <tr>
-                    <td>Дата записи:</td>
-                    <td><input type="date" th:field="*{date}"></td>
+                    <td>Содержимое:</td>
+                    <td><input type="text" th:field="*{content}"></td>
                 </tr>
                 <tr>
-                    <td>Наименование услуги:</td>
-                    <td><input type="text" th:field="*{service}"></td>
+                    <td>Город отправки:</td>
+                    <td><input type="text" th:field="*{sendingCity}"></td>
                 </tr>
                 <tr>
-                    <td>ФИО обслуживающего мастера:</td>
-                    <td><input type="text" th:field="*{master}"></td>
+                    <td>Дата отправки:</td>
+                    <td><input type="date" min="1940" max="2024" th:field="*{sendingDate}"></td>
+                </tr>
+                <tr>
+                    <td>Город получения:</td>
+                    <td><input type="text" th:field="*{receiptCity}"></td>
+                </tr>
+                <tr>
+                    <td>Дата получения:</td>
+                    <td><input type="date" min="1940" max="2024" th:field="*{receiptDate}"></td>
                 </tr>
                 <tr>
                     <td colspan="2">

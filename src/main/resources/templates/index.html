@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>Барбершоп</title>
+    <title>Перевозка грузов</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -20,11 +20,11 @@
 
 <body>
 
-<blockquote class="blockquote text-center"><h1>Записи клиентов в барбершопе</h1></blockquote>
+<blockquote class="blockquote text-center"><h1>Перевозки грузов</h1></blockquote>
 
 <div class="row">
     <div class="col-md-8 offset-md-4">
-        <h4>Поиск записи по любому критерию:</h4>
+        <h4>Поиск груза по любому критерию:</h4>
         <form th:action="@{/}">
             <input type="text" name="keyword" id="keyword" size="70" th:value="${keyword}" required/>
             <input type="submit" class="btn btn-success btn-sm" value="Поиск"/>
@@ -35,30 +35,33 @@
 </div>
 
 <h4>Сортировка</h4>
-<a th:href="@{'/sorted/asc'}">Сортировать по дате записи (по возрастанию)</a> |
-<a th:href="@{'/sorted/desc'}">Сортировать по дате записи (по убыванию)</a>
+<a th:href="@{'/sorted/asc'}">Сортировать по дате отправки (по возрастанию)</a> |
+<a th:href="@{'/sorted/desc'}">Сортировать по дате отправки (по убыванию)</a>
 
 <table id="1" class="table table-striped table-hover">
     <thead>
     <tr>
-        <th scope="col">ID записи</th>
-        <th scope="col">ФИО клиента</th>
-        <th scope="col">Дата записи</th>
-        <th scope="col">Наименование услуги</th>
-        <th scope="col">ФИО обслуживающего мастера</th>
-        <th scope="col">Действия</th>
+        <th scope="col">ID груза</th>
+        <th scope="col">Наименование груза</th>
+        <th scope="col">Содержимое груза</th>
+        <th scope="col">Город отправки</th>
+        <th scope="col">Дата отправки</th>
+        <th scope="col">Город получения</th>
+        <th scope="col">Дата получения</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="client: ${listClients}">
-        <th scope="row" class="text-black" th:text="${client.id}">ID записи отсутствует</th>
-        <th scope="row" class="text-black" th:text="${client.clientName}">ФИО клиента отсутствует</th>
-        <th scope="row" class="text-black" th:text="${client.date}">Дата записи отсутствует</th>
-        <th scope="row" class="text-black" th:text="${client.service}">Наименование услуги отсутствует</th>
-        <th scope="row" class="text-black" th:text="${client.master}">ФИО обслуживающего мастера отсутствует</th>
+    <tr th:each="cargo: ${listCargoes}">
+        <th scope="row" class="text-black" th:text="${cargo.id}">ID груза отсутствует</th>
+        <th scope="row" class="text-black" th:text="${cargo.name}">Наименование груза отсутствует</th>
+        <th scope="row" class="text-black" th:text="${cargo.content}">Содержимое груза отсутствует</th>
+        <th scope="row" class="text-black" th:text="${cargo.sendingCity}">Город отправки отсутствует</th>
+        <th scope="row" class="text-black" th:text="${cargo.sendingDate}">Дата отправки отсутствует</th>
+        <th scope="row" class="text-black" th:text="${cargo.receiptCity}">Город получения отсутствует</th>
+        <th scope="row" class="text-black" th:text="${cargo.receiptDate}">Дата получения отсутствует</th>
         <td>
-            <a th:href="@{'/edit/'+${client.id}}"><button type="button" class="btn btn-info">Редактировать</button></a>
-            <a th:href="@{'/delete/'+${client.id}}"><button type="button" class="btn btn-danger">Удалить</button></a>
+            <a th:href="@{'/edit/'+${cargo.id}}"><button type="button" class="btn btn-info">Редактировать</button></a>
+            <a th:href="@{'/delete/'+${cargo.id}}"><button type="button" class="btn btn-danger">Удалить</button></a>
         </td>
     </tr>
     </tbody>
@@ -70,59 +73,53 @@
             let table = document.getElementById('1')
             let tBody = table.querySelector('tbody')
             const count = tBody.querySelectorAll('tr').length;
-            document.write('Количество записей в таблице: ' + count)
+            document.write('Количество записей о грузах в таблице: ' + count)
         }
         getRowsColumn();
-
     </script>
 </p>
 
 <p class="text-black">
     <script type="text/javascript">
 
-        function getAvgClientsPerDay() {
+        function getCargoesPerDay() {
             let table = document.getElementById('1')
             let tBody = table.querySelector('tbody')
             const rows = tBody.querySelectorAll('tr')
 
-            let clientsByDay = {};
+            let cargoesByDay = {};
 
             rows.forEach(row => {
                 let date = row.cells[2].innerText;
 
-                if (clientsByDay[date]) {
-                    clientsByDay[date] += 1;
+                if (cargoesByDay[date]) {
+                    cargoesByDay[date] += 1;
                 } else {
-                    clientsByDay[date] = 1;
+                    cargoesByDay[date] = 1;
                 }
             });
 
-            let totalDays = Object.keys(clientsByDay).length;
-            let totalClients = Object.values(clientsByDay).reduce((a, b) => a + b, 0);
-
-            let averageClients = totalClients / totalDays;
-
-            document.write('Cреднее количество клиентов в день: ' + averageClients.toFixed(2))
+            document.write('Количество получений груза в день: ' + JSON.stringify(cargoesByDay, null, 2))
         }
-        getAvgClientsPerDay();
+        getCargoesPerDay();
 
     </script>
 </p>
 
 <blockquote class="blockquote text-center">
-    <h4>Гистограмма количества записей клиентов по дням</h4>
+    <h4>Гистограмма количества грузов по дням</h4>
     <canvas id="registrationChart" style="width: 80%; height: 500px; margin:auto"></canvas>
 </blockquote>
 
 <script type="text/javascript">
-    function getClientsData() {
+    function getCargoesData() {
         const table = document.getElementById('1');
         const rows = table.querySelectorAll('tbody tr');
 
         const registrationDates = {};
 
         rows.forEach(row => {
-            const dateCell = row.cells[2].innerText;
+            const dateCell = row.cells[6].innerText;
 
             if (registrationDates[dateCell]) {
                 registrationDates[dateCell] += 1;
@@ -135,9 +132,9 @@
     }
 
     function renderChart() {
-        const clientsData = getClientsData();
-        const dates = Object.keys(clientsData);
-        const counts = Object.values(clientsData);
+        const cargoesData = getCargoesData();
+        const dates = Object.keys(cargoesData);
+        const counts = Object.values(cargoesData);
 
         const ctx = document.getElementById('registrationChart').getContext('2d');
         const chart = new Chart(ctx, {
