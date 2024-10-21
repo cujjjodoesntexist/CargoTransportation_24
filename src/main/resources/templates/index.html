@@ -90,7 +90,7 @@
             let cargoesByDay = {};
 
             rows.forEach(row => {
-                let date = row.cells[2].innerText;
+                let date = row.cells[6].innerText;
 
                 if (cargoesByDay[date]) {
                     cargoesByDay[date] += 1;
@@ -99,7 +99,7 @@
                 }
             });
 
-            document.write('Количество получений груза в день: ' + JSON.stringify(cargoesByDay, null, 2))
+            document.write('Количество получений груза по дням: ' + JSON.stringify(cargoesByDay, null, 2))
         }
         getCargoesPerDay();
 
