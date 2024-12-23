@@ -5,21 +5,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
-import java.time.LocalDate;
 
 
 @Data
 @Entity
-public class Cargoes {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String content;
-    private String sendingCity;
-    private LocalDate sendingDate;
-    private String receiptCity;
-    private LocalDate receiptDate;
+    private String username;
+    private String password;
+    private String role;
 
-    protected Cargoes() {}
+    protected User(){}
 }
