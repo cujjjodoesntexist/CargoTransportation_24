@@ -3,83 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>Страница входа</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body{
-            background-color: #ebdbb2;
-            background-size: cover;
-            font-family: "Trebuchet MS";
-            position: relative;
-
-        }
-
-        .input{
-            margin: auto;
-            width:320px;
-            height: 75%;
-            display:flex;
-            flex-direction: column;
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
             justify-content: center;
-
+            align-items: center;
+            height: 100vh;
         }
 
-        .label{
-            color: #fb4934;
-            margin-right:auto;
-            margin-left:auto;
-            width: fit-content;
-            font-size: 100px;
-        }
-
-        .button{
-            height:100px;
-            width: 320px;
+        .content {
+            background-color: white;
+            width: 400px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+        }
+
+        .label {
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
             margin-bottom: 20px;
-            font-family: "Trebuchet MS";
-            border-radius: 10px;
         }
 
-        .button_type_login{
-            background-color: #bdae93;
-            color: #1d2021;
-            border: 0;
+        .input {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .button_type_register{
-            border: #a89984 2px solid;
-            background-color: #ebdbb2;
-            color: #1d2021;
+        .input__form {
+            height: 45px;
+            padding: 0 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.2s;
         }
 
-        .button:hover{
-            color: #1d2021;
-            background-color: #a89984;
+        .input__form:focus {
+            border-color: #007bff;
+            outline: none;
         }
 
-        .input__form{
+        .button {
             height: 50px;
-            margin-bottom:5px;
-            font-family: "Trebuchet MS";
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 5px;
+        }
+
+        .button_type_login {
+            border: none;
+            background-color: #007bff;
+            color: white;
+        }
+
+        .button_type_login:hover {
+            background-color: #0056b3;
+        }
+
+        .button_type_register {
+            border: 2px solid #007bff;
+            background-color: white;
+            color: #007bff;
+        }
+
+        .button_type_register:hover {
+            background-color: #e9f5ff;
+        }
+
+        .register-link {
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
 <div class="content">
-    <h1 class="label">Вход</h1>
+    <h1 class="label">Вход в систему</h1>
     <form th:action="@{/login}" method="post">
         <div class="input">
-            <input type="text" name="username" placeholder="Имя пользователя" class="input__form"/>
+            <input type="text" name="username" placeholder="Логин" class="input__form"/>
             <input type="password" name="password" placeholder="Пароль" class="input__form"/>
-            <input type="submit" value="Вход" class="button button_type_login"/>
-            <a href="/register">
-                <button type="button" class="button button_type_register">
-                    Нет аккаунта? Создайте его!
-                </button>
-            </a>
+            <input type="submit" value="Войти" class="button button_type_login"/>
         </div>
     </form>
-
+    <a href="/register" class="register-link">
+        <button type="button" class="button button_type_register">
+            Создать аккаунт
+        </button>
+    </a>
 </div>
-
 </body>
 </html>
